@@ -25,9 +25,25 @@ jobs:
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: cluster0.bbmo990.mongodb.net
-      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
-      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
       PORT: 8080
+    # service containers like a test database
+    # services go under a specific job
+    services:
+      # name of the service
+      mongodb:
+        # image to use
+        image: mongo
+        # env variables inside the image
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+        # ports to expose
+        ports:
+          - 27017:27017
+        # health check
+        options: --health-cmd "mongo --eval \"printjson(db.serverStatus())\"" --health-interval 10s --health-timeout 5s --health-retries 3
     steps:
       - name: Get Code
         uses: actions/checkout@v3
