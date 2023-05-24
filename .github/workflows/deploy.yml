@@ -11,6 +11,17 @@ jobs:
   test:
     environment: test
     runs-on: ubuntu-latest
+    # To add a docker container to the job, use the container keyword.
+    # we need to use images that are available on docker hub
+    # all following steps will be executed inside the container
+    # example of shorthand syntax
+    container: node:16
+    # example of full syntax
+    # container:
+    #   image: node:16
+      # env variables inside the image
+      # env:
+      #   MONGODB_CONNECTION_PROTOCOL: mongodb+srv
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: cluster0.bbmo990.mongodb.net
