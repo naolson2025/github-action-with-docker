@@ -24,7 +24,10 @@ jobs:
       #   MONGODB_CONNECTION_PROTOCOL: mongodb+srv
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: mongodb # mongodb matches the name of the service below
+      # mongodb cluster address matches the name of the service below
+      # because our job is running inside a container, we can use the service name as the address. Github actions automatically networks the container with the service
+      # if we were running the job on a self-hosted runner, we would need to use the ip address of the service: 127.0.0.1:27017 (default mongodb port)
+      MONGODB_CLUSTER_ADDRESS: mongodb
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
@@ -35,6 +38,9 @@ jobs:
       mongodb:
         # image to use
         image: mongo
+        # only need to expose ports if the job is not running inside a container
+        # ports:
+        #   - 27017:27017
         # env variables inside the image
         env:
           MONGO_INITDB_ROOT_USERNAME: root
