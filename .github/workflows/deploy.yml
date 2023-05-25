@@ -39,11 +39,6 @@ jobs:
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
-        # ports to expose
-        ports:
-          - 27017:27017
-        # health check
-        options: --health-cmd "mongo --eval \"printjson(db.serverStatus())\"" --health-interval 10s --health-timeout 5s --health-retries 3
     steps:
       - name: Get Code
         uses: actions/checkout@v3
