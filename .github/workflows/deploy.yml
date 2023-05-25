@@ -23,8 +23,8 @@ jobs:
       # env:
       #   MONGODB_CONNECTION_PROTOCOL: mongodb+srv
     env:
-      MONGODB_CONNECTION_PROTOCOL: mongodb+srv
-      MONGODB_CLUSTER_ADDRESS: cluster0.bbmo990.mongodb.net
+      MONGODB_CONNECTION_PROTOCOL: mongodb
+      MONGODB_CLUSTER_ADDRESS: mongodb # mongodb matches the name of the service below
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
